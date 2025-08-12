@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi's Personal Website</title>
+    <style>
+        /* Modern, clean styling for personal website */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #0066ff;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #0066ff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #0066ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 250px;
+        }
+
+        .search-container input {
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+            width: 100%;
+        }
+
+        .search-container input:focus {
+            border-color: #0066ff;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            color: #666;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #0066ff;
+            cursor: pointer;
+        }
+
+        /* Search Results Styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 4px;
+        }
+
+        .search-result-content {
+            font-size: 0.9rem;
+            color: #666;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .search-result-url {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        /* Main content area */
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* CV Section Styles */
+        .cv-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .cv-section h2 {
+            color: #0066ff;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #0066ff;
+            padding-bottom: 0.5rem;
+        }
+
+        .cv-section h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: #444;
+        }
+
+        .cv-section p, .cv-section ul {
+            margin-bottom: 1rem;
+        }
+
+        .cv-section ul {
+            padding-left: 1.5rem;
+        }
+
+        .cv-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item, .results-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item h4, .results-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .education-item p, .results-item p {
+            color: #666;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .results-table th, .results-table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .results-table th {
+            background-color: #f2f2f2;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        .contact-form button {
+            background: #0066ff;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: #0052cc;
+        }
+
+        #formResponse {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Contact Info Styles */
+        .contact-info {
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h2 {
+            margin-bottom: 1rem;
+            color: #0066ff;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #0066ff;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #0052cc;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+
+            .logo-container {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+
+            .search-container {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .search-container input {
+                width: 70%;
+            }
+            
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="photos/pic1.jpg" alt="Levi's Photo" class="logo-img">
+                <div class="logo-text">LEVI MUVHUNI | TECH PORTFOLIO</div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+                <button class="search-btn" id="search-button"><i class="fas fa-arrow-right"></i></button>
+                <div class="search-results" id="search-results"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="home" class="cv-section">
+            <h1>DESIGN. DEVELOP. DEPLOY</h1>
+            <p>I'm Levi Tanatswa Muvhuni, an IT student at Chinhoyi University of Technology, passionate about turning ideas into digital solutions.</p>
+        </section>
+
+        <section id="cv" class="cv-section">
+            <h2>Curriculum Vitae</h2>
+            
+            <div class="personal-info">
+                <h3>Personal Information</h3>
+                <ul>
+                    <li><strong>Full Name:</strong> Levi Tanatswa Muvhuni</li>
+                    <li><strong>Registration Number:</strong> C23155741Q</li>
+                    <li><strong>Age:</strong> 22</li>
+                    <li><strong>Nationality:</strong> Zimbabwean</li>
+                    <li><strong>Religion:</strong> Christian</li>
+                    <li><strong>Marital Status:</strong> Single</li>
+                    <li><strong>ID Number:</strong> 702039367538</li>
+                    <li><strong>Languages:</strong> English & Shona</li>
+                    <li><strong>Address:</strong> 2997G Chiedza, Karoi</li>
+                </ul>
+            </div>
+            
+            <div class="career-objective">
+                <h3>Career Objective</h3>
+                <p>I am a motivated IT student at Chinhoyi University of Technology with a strong foundation in database systems, software engineering, mobile application development, and website design. I aim to apply my technical skills, gain practical experience, and contribute meaningfully to innovative projects within your organization.</p>
+            </div>
+            
+            <div class="education">
+                <h3>Education</h3>
+                
+                <div class="education-item">
+                    <h4>Chinhoyi University of Technology (2023 - 2027)</h4>
+                    <p>Bachelor of Science Honours Degree in Information Technology</p>
+                </div>
+                
+                <div class="education-item">
+                    <h4>Devine Visions College (2021 - 2022)</h4>
+                    <p>Advanced Level (3 A-Level passes)</p>
+                </div>
+                
+                <div class="education-item">
+                    <h4>Chikangwe High School (2016 - 2020)</h4>
+                    <p>Ordinary Level (9 O-Level passes including English and Mathematics)</p>
+                </div>
+            </div>
+            
+            <div class="skills">
+                <h3>Skills</h3>
+                <ul>
+                    <li><strong>Database Management:</strong> Expertise in designing and managing databases</li>
+                    <li><strong>Web Development:</strong> Skilled in HTML, CSS, and JavaScript</li>
+                    <li><strong>Networking:</strong> Knowledge of TCP/IP and tools like Wireshark</li>
+                    <li><strong>Software Engineering:</strong> Understanding development lifecycles and Agile methods</li>
+                    <li><strong>Data Science & Analytics:</strong> Ability to process and interpret data</li>
+                    <li><strong>Operating Systems:</strong> Proficient in Linux, Windows, and macOS</li>
+                    <li><strong>Encryption & Security:</strong> Familiarity with securing applications</li>
+                </ul>
+            </div>
+            
+            <div class="results">
+                <h3>Relevant Coursework</h3>
+                
+                <div class="results-item">
+                    <h4>Semester 1.1 (August 2023 - December 2023)</h4>
+                    <table class="results-table">
+                        <tr>
+                            <th>Module</th>
+                        </tr>
+                        <tr>
+                            <td>Computer Mathematics</td>                          
+                        </tr>
+                        <tr>
+                            <td>Introduction to Procedural Programming</td>
+                        </tr>
+                        <tr>
+                            <td>Communication and Information Technology</td>
+                        </tr>
+                        <tr>
+                            <td>Data Science</td>                          
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="results-item">
+                    <h4>Semester 1.2 (March 2024 - June 2024)</h4>
+                    <table class="results-table">
+                        <tr>
+                            <th>Module</th>
+                        </tr>
+                        <tr>
+                            <td>Visual Languages and Programming</td>
+                        </tr>
+                        <tr>
+                            <td>Operating Systems</td>
+                        </tr>
+                        <tr>
+                            <td>Computer Organization and Architecture</td>
+                        </tr>
+                        <tr>
+                            <td>Database Systems</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="results-item">
+                    <h4>Semester 2.1 (August 2023 - December 2023)</h4>
+                    <table class="results-table">
+                        <tr>
+                            <th>Module</th>
+                        </tr>
+                        <tr>
+                            <td>Object Oriented Programming</td>                          
+                        </tr>
+                        <tr>
+                            <td>Software Engineering And Project Management</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Application Development</td>                          
+                        </tr>
+                        <tr>
+                            <td>Website Design and E-Business</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="results-item">
+                    <h4>Semester 2.2 (March 2025 - June 2025)</h4>
+                    <table class="results-table">
+                        <tr>
+                            <th>Module</th>
+                        </tr>
+                        <tr>
+                            <td>Data Communications and Networks</td>                          
+                        </tr>
+                        <tr>
+                            <td>Data Structures And Algorithms</td>
+                        </tr>
+                        <tr>
+                            <td>Group Project</td>                           
+                        </tr>
+                        <tr>
+                            <td>Engineering Research Methods and Statistics</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="projects">
+                <h3>Projects</h3>
+                <p><strong>Student Representative Council (SRC) Voting Website:</strong> Designed and developed a secure voting website demonstrating abilities in web development, database management, and user authentication with emphasis on data security and integrity.</p>
+            </div>
+            
+            <div class="reference">
+                <h3>Reference</h3>
+                <p><strong>Mr C. Chaitezvi</strong><br>
+                Industrial Attachment Coordinator<br>
+                ICT and Electronics Department<br>
+                Chinhoyi University of Technology<br>
+                Email: cchaitezvi@cut.ac.zw<br>
+                Phone: +263 71 788 5159</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-form">
+            <h2>Send Me a Message</h2>
+            <form id="contactForm" action="https://formspree.io/f/levitanatswa3@gmail.com" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <p id="formResponse"></p>
+        </section>
+        
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong>Email:</strong> levitanatswa3@gmail.com</p>
+            <p><strong>Phone:</strong> +263 78 084 2812</p>
+            <p><strong>Alternate Phone:</strong> +263 71 975 1696</p>
+            
+            <div class="social-links">
+                <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://facebook.com/yourprofile" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Levi Tanatswa Muvhuni. All rights reserved.</p>
+        <p>Bachelor of Science Honours Degree in Information Technology | Chinhoyi University of Technology</p>
+    </footer>
+
+    <!-- Font Awesome for social icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Algolia Search JS -->
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.3/dist/algoliasearch-lite.umd.min.js"></script>
+    
+    <!-- Search Functionality -->
+    <script>
+        // Initialize Algolia client
+        const client = algoliasearch('GDBZS21HXP', '3bce0bec1fdc0aecbf4eebcd68fa3588');
+        const index = client.initIndex('website_search');
+        
+        // Get DOM elements
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
+        
+        // Debounce function to limit API calls
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+        
+        // Display search results
+        function displayResults(hits) {
+            if (hits.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                searchResults.style.display = 'block';
+                return;
+            }
+            
+            searchResults.innerHTML = hits.map(hit => `
+                <div class="search-result-item" onclick="window.location.href='${hit.url}'">
+                    <div class="search-result-title">${hit.title}</div>
+                    <div class="search-result-content">${hit._snippetResult?.content?.value || hit.content.substring(0, 120)}</div>
+                    <div class="search-result-url">${hit.url.replace('.html', '')}</div>
+                </div>
+            `).join('');
+            
+            searchResults.style.display = 'block';
+        }
+        
+        // Handle search
+        async function handleSearch(query) {
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            try {
+                const { hits } = await index.search(query, {
+                    attributesToSnippet: ['content:80'],
+                    snippetEllipsisText: '...',
+                    hitsPerPage: 5
+                });
+                displayResults(hits);
+            } catch (error) {
+                console.error('Search error:', error);
+                searchResults.innerHTML = '<div class="search-result-item">Error loading results</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+        
+        // Event listeners
+        searchInput.addEventListener('input', debounce(() => {
+            handleSearch(searchInput.value.trim());
+        }, 300));
+        
+        searchButton.addEventListener('click', () => {
+            handleSearch(searchInput.value.trim());
+        });
+        
+        // Close results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchResults.style.display = 'none';
+            }
+            if (e.key === 'Enter') {
+                handleSearch(searchInput.value.trim());
+            }
+        });
+
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        const formResponse = document.getElementById('formResponse');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formResponse.textContent = 'Sending your message...';
+            formResponse.style.color = '#0066ff';
+            
+            const formData = new FormData(contactForm);
+            
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formResponse.textContent = 'Message sent successfully!';
+                    formResponse.style.color = 'green';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                formResponse.textContent = 'There was a problem sending your message. Please try again later.';
+                formResponse.style.color = 'red';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

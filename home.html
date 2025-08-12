@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi Tanatswa | IT Student & Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Improved Header */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #0066ff;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #222;
+            margin: 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 1rem;
+        }
+        
+        .nav-links a {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: #0066ff;
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid #0066ff;
+        }
+        
+        .nav-links a:hover {
+            background-color: transparent;
+            color: #0066ff;
+            transform: translateY(-2px);
+        }
+        
+        .search-container {
+            position: relative;
+            width: 250px;
+        }
+        
+        .search-container input {
+            padding: 0.7rem 1rem 0.7rem 2.5rem;
+            border: 2px solid #e1e5ee;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            background-color: #f8f9fa;
+        }
+        
+        .search-container input:focus {
+            border-color: #0066ff;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            color: #666;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: #0066ff;
+            cursor: pointer;
+        }
+        
+        /* Search Results Styles */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e1e5ee;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .search-result-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f5f8ff;
+        }
+        
+        .search-result-title {
+            font-weight: 600;
+            color: #0066ff;
+            margin-bottom: 4px;
+        }
+        
+        .search-result-content {
+            font-size: 0.9rem;
+            color: #666;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .search-result-url {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #0066ff;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0066ff, #00a0ff);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: white;
+            color: #0066ff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Education Timeline */
+        .education-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            margin-bottom: 2rem;
+            color: #0066ff;
+            font-size: 1.8rem;
+        }
+        
+        .education-timeline {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .education-box {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid #0066ff;
+        }
+        
+        .education-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.1);
+        }
+        
+        .education-box h3 {
+            color: #0066ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-duration {
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        /* Skills Section */
+        .skills-section {
+            margin: 3rem 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e1e5ee;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.1);
+            border-color: #0066ff;
+        }
+        
+        .skill-card img {
+            max-width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+        
+        .skill-card h4 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        /* Project Section */
+        .project-section {
+            margin: 3rem 0;
+        }
+        
+        .project-showcase {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid #0066ff;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-technologies {
+            display: flex;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .tech-badge {
+            background: rgba(0, 102, 255, 0.1);
+            color: #0066ff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            margin: 1.5rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #00ccff;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 0.5rem 1rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 1;
+            }
+            
+            .logo-container {
+                order: 2;
+                flex-grow: 1;
+                justify-content: center;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 0.5rem;
+                display: none;
+            }
+            
+            .nav-links {
+                order: 4;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+                display: none;
+            }
+            
+            .nav-links.active, .search-container.active {
+                display: flex;
+            }
+            
+            .education-timeline {
+                flex-direction: column;
+            }
+            
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Improved Header -->
+    <header class="header">
+        <nav class="navbar">
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <a href="index.html" class="logo-container">
+                <img src="photos/pic1.jpg" alt="Levi's Photo" class="logo-img">
+                <h1 class="logo-text">LEVI T MUVHUNI</h1>
+            </a>
+
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+                <button class="search-btn" id="search-button"><i class="fas fa-arrow-right"></i></button>
+                <div class="search-results" id="search-results"></div>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cv.html">CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Levi Tanatswa Muvhuni</h1>
+            <p>IT Innovator | Full-stack Developer & UI/UX Enthusiast</p>
+            <a href="contact.html" class="btn">Get In Touch</a>
+        </section>
+
+        <!-- Education Section -->
+        <section class="education-section">
+            <h2 class="section-title">Education Journey</h2>
+            <div class="education-timeline">
+                <div class="education-box">
+                    <h3>Chinhoyi University of Technology</h3>
+                    <span class="education-duration">2023 - 2027</span>
+                    <p>Bachelor of Science Honors in Information Technology</p>
+                </div>
+                <div class="education-box">
+                    <h3>Devine Visions College</h3>
+                    <span class="education-duration">2021 - 2022</span>
+                    <p>Advanced Level</p>
+                    <p>3 A-Level passes</p>
+                </div>
+                <div class="education-box">
+                    <h3>Chikangwe High School</h3>
+                    <span class="education-duration">2016 - 2020</span>
+                    <p>Ordinary Level</p>
+                    <p>9 O-Level passes including English and Mathematics</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2282/2282188.png" alt="Web Development">
+                    <h4>Web Development</h4>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4299/4299956.png" alt="Database">
+                    <h4>Database</h4>
+                    <p>MySQL, Database Design</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1006/1006363.png" alt="Programming">
+                    <h4>Programming</h4>
+                    <p>Software Engineering</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2282/2282247.png" alt="Networking">
+                    <h4>Networking</h4>
+                    <p>TCP/IP, Network Security</p>
+                </div>
+                <div class="skill-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="IT Support">
+                    <h4>IT Support</h4>
+                    <p>Hardware troubleshooting & system maintenance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Section -->
+        <section class="project-section">
+            <div class="project-showcase">
+                <div class="project-header">
+                    <h2 class="section-title">Featured Project</h2>
+                    <a href="about.html#projects" class="btn">View All Projects</a>
+                </div>
+                <h3>Student Representative Council (SRC) Voting Website</h3>
+                <p>A secure online voting system developed for university elections, featuring user authentication, database management, and emphasis on data security and integrity.</p>
+                <div class="project-technologies">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">MySQL</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section style="text-align: center; margin: 3rem 0;">
+            <h2>Ready to discuss an attachment opportunity?</h2>
+            <a href="contact.html" class="btn">Contact Me Today</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Levi Tanatswa Muvhuni. All rights reserved.</p>
+        <div class="contact-info">
+            <p><i class="fas fa-phone"></i> +263 78 084 2812 | +263 71 975 1696</p>
+            <p><i class="fas fa-envelope"></i> levitanatswa3@gmail.com</p>
+        </div>
+        <p>Bachelor of Science Honors Degree in Information Technology<br>Chinhoyi University of Technology</p>
+    </footer>
+
+    <!-- Algolia Search JS -->
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.14.3/dist/algoliasearch-lite.umd.min.js"></script>
+    
+    <script>
+        // Initialize Algolia client
+        const client = algoliasearch('GDBZS21HXP', '3bce0bec1fdc0aecbf4eebcd68fa3588');
+        const index = client.initIndex('website_search');
+        
+        // Get DOM elements
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
+        
+        // Debounce function to limit API calls
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+        
+        // Display search results
+        function displayResults(hits) {
+            if (hits.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                searchResults.style.display = 'block';
+                return;
+            }
+            
+            searchResults.innerHTML = hits.map(hit => `
+                <div class="search-result-item" onclick="window.location.href='${hit.url}'">
+                    <div class="search-result-title">${hit.title}</div>
+                    <div class="search-result-content">${hit._snippetResult?.content?.value || hit.content.substring(0, 120)}</div>
+                    <div class="search-result-url">${hit.url.replace('.html', '')}</div>
+                </div>
+            `).join('');
+            
+            searchResults.style.display = 'block';
+        }
+        
+        // Handle search
+        async function handleSearch(query) {
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            try {
+                const { hits } = await index.search(query, {
+                    attributesToSnippet: ['content:80'],
+                    snippetEllipsisText: '...',
+                    hitsPerPage: 5
+                });
+                displayResults(hits);
+            } catch (error) {
+                console.error('Search error:', error);
+                searchResults.innerHTML = '<div class="search-result-item">Error loading results</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+        
+        // Event listeners
+        searchInput.addEventListener('input', debounce(() => {
+            handleSearch(searchInput.value.trim());
+        }, 300));
+        
+        searchButton.addEventListener('click', () => {
+            handleSearch(searchInput.value.trim());
+        });
+        
+        // Close results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchResults.style.display = 'none';
+            }
+            if (e.key === 'Enter') {
+                handleSearch(searchInput.value.trim());
+            }
+        });
+
+        // Mobile menu toggle functionality
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.search-container').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
